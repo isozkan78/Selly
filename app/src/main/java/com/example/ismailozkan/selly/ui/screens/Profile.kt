@@ -1,7 +1,6 @@
 package com.example.ismailozkan.selly.ui.screens
 
 import android.os.Bundle
-import android.text.Layout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
