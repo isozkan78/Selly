@@ -1,14 +1,12 @@
 package com.example.ismailozkan.selly.ui.screens
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.widget.Space
+import android.text.Layout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,10 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Edit
@@ -31,18 +26,14 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Star
-import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,21 +41,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.modifier.modifierLocalMapOf
-import androidx.compose.ui.platform.InspectableModifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.ismailozkan.selly.R
-import com.example.ismailozkan.selly.ui.theme.SellyTheme
 
 class Profile : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,13 +60,28 @@ class Profile : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                profileScreen()
+                ProfileScreen()
             }
         }
     }
 }
 @Composable
-fun profileScreen() {
+fun ProfileScreen() {
+
+    val gradient = Brush.linearGradient(
+        0.0f to colorResource(id = R.color.fblaci),
+        500.0f to Color.White,
+        start = Offset.Zero,
+        end = Offset.Infinite
+    )
+    val gradient2 = Brush.linearGradient(
+        0.0f to Color.White,
+        500.0f to Color.Gray,
+        start = Offset.Zero,
+        end = Offset.Infinite
+    )
+
+    Box(modifier = Modifier.background(gradient))
 
     val starCount = 5
     val selectedStars = 3
@@ -89,26 +89,30 @@ fun profileScreen() {
     if (showDialog) {
         AlertDialog (onDismiss = {showDialog = false})
     }
-        Column (
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(top = 50.dp),
 
-        ) {
-            Text(
-                text = "Profile",
-                fontWeight = FontWeight.Bold,
-                fontSize = 40.sp,
-                color = colorResource(id = R.color.fblaci)
-            )
-        }
+            Row (
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.padding(top = 40.dp)
+            ){
+                Text(
+                    text = "Profile",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 40.sp,
+                    color = colorResource(id = R.color.fblaci)
+                )
+            }
         Column(
             modifier = Modifier.padding(start =10.dp , top = 150.dp)
 
         ) {
             Column (
                 modifier = Modifier
-                    .border(1.dp,color = colorResource(id = R.color.fblaci),shape = AbsoluteRoundedCornerShape(10.dp)
+                    .border(
+                        1.dp,
+                        color = colorResource(id = R.color.fblaci),
+                        shape = AbsoluteRoundedCornerShape(10.dp)
                     )
+                    .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
             ) {
                 Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
                     Icon(
@@ -181,8 +185,12 @@ fun profileScreen() {
             Spacer(modifier = Modifier.padding(35.dp))
             Column (
                 modifier = Modifier
-                    .border(1.dp,color = colorResource(id = R.color.fblaci),shape = AbsoluteRoundedCornerShape(10.dp)
+                    .border(
+                        1.dp,
+                        color = colorResource(id = R.color.fblaci),
+                        shape = AbsoluteRoundedCornerShape(10.dp)
                     )
+                    .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
             )
             {
                 Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
