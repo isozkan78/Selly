@@ -59,7 +59,6 @@ class Profile : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                ProfileScreen()
             }
         }
     }
@@ -88,204 +87,204 @@ fun ProfileScreen() {
     if (showDialog) {
         AlertDialog (onDismiss = {showDialog = false})
     }
-
-            Row (
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(top = 40.dp)
-            ){
-                Text(
-                    text = "Profile",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 40.sp,
-                    color = colorResource(id = R.color.fblaci)
+    Row (
+        horizontalArrangement = Arrangement.Center,
+        modifier = Modifier.padding(top = 40.dp)
+    ){
+        Text(
+            text = "Profile",
+            fontWeight = FontWeight.Bold,
+            fontSize = 40.sp,
+            color = colorResource(id = R.color.fblaci)
+        )
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(painter = painterResource(id = R.drawable.selly), contentDescription = "", modifier = Modifier.size(150.dp))
+        }
+    }
+    Column(
+        modifier = Modifier.padding(start =10.dp , top = 150.dp)
+    ) {
+        Column (
+            modifier = Modifier
+                .border(
+                    1.dp,
+                    color = colorResource(id = R.color.fblaci),
+                    shape = AbsoluteRoundedCornerShape(10.dp)
                 )
-            }
-        Column(
-            modifier = Modifier.padding(start =10.dp , top = 150.dp)
-
+                .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
         ) {
-            Column (
-                modifier = Modifier
-                    .border(
-                        1.dp,
-                        color = colorResource(id = R.color.fblaci),
-                        shape = AbsoluteRoundedCornerShape(10.dp)
-                    )
-                    .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
-            ) {
-                Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
+            Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
+                Icon(
+                    painter = painterResource(id = R.drawable.pp_icon),
+                    contentDescription = "Profile Picture",
+                    modifier = Modifier.size(60.dp),
+                    colorResource(id = R.color.fblaci)
+                )
+                repeat(starCount) { index ->
+                    IconButton(
+                        onClick = { /* Handle star click for index */ }
+                    ) {
+                        Icon(
+                            imageVector = if (index < selectedStars) {
+                                Icons.Filled.Star
+                            } else {
+                                Icons.Outlined.Star },
+                            contentDescription = "Star Rating ${index + 1}",
+                            modifier = Modifier.fillMaxSize(),
+                            colorResource(id = R.color.fblaci)
+                        )
+                    }
+                }
+                IconButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Top)
+                        .padding(end = 16.dp)
+                ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.pp_icon),
-                        contentDescription = "Profile Picture",
-                        modifier = Modifier.size(60.dp),
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Edit",
+                        modifier = Modifier.size(40.dp),
                         colorResource(id = R.color.fblaci)
                     )
-                    repeat(starCount) { index ->
-                        IconButton(
-                            onClick = { /* Handle star click for index */ }
-                        ) {
-                            Icon(
-                                imageVector = if (index < selectedStars) {
-                                    Icons.Filled.Star
-                                } else {
-                                    Icons.Outlined.Star
-                                },
-                                contentDescription = "Star Rating ${index + 1}",
-                                modifier = Modifier.fillMaxSize(),
-                                colorResource(id = R.color.fblaci)
-                            )
-                        }
-                    }
-                    IconButton(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.Top)
-                            .padding(end = 16.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = "Edit",
-                            modifier = Modifier.size(40.dp),
-                            colorResource(id = R.color.fblaci)
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.padding(5.dp))
-                Row (modifier = Modifier.padding(start = 6.dp)){
-                    Text(
-                        text = "Name Surname: ",
-                        fontWeight = FontWeight.Bold ,
-                        fontSize = 20.sp,
-                        color = colorResource(id = R.color.fblaci)
-                        )
-                    //In this place Users Name And Surname will be shown.
-                }
-                Spacer(modifier = Modifier.padding(5.dp))
-                Row (modifier = Modifier.padding(start = 6.dp)) {
-                    Text(
-                        text = "E-mail: ",fontWeight = FontWeight.Bold ,
-                        fontSize = 20.sp,
-                        color = colorResource(id = R.color.fblaci)
-                    )
-                    //In this place Users e-Mail will be shown.
-                }
-                Spacer(modifier = Modifier.padding(5.dp))
-                Row (modifier = Modifier.padding(start = 6.dp , bottom = 10.dp)) {
-                    Text(
-                        text = "Phone Number: ",
-                        fontWeight = FontWeight.Bold ,
-                        fontSize = 20.sp,
-                        color = colorResource(id = R.color.fblaci)
-                    )
-                    //In this place Users Phone Number will be shown.
                 }
             }
-            Spacer(modifier = Modifier.padding(35.dp))
-            Column (
-                modifier = Modifier
-                    .border(
-                        1.dp,
-                        color = colorResource(id = R.color.fblaci),
-                        shape = AbsoluteRoundedCornerShape(10.dp)
-                    )
-                    .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
-            )
-            {
-                Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
-                    Text(text = "Locations", fontWeight = FontWeight.Bold, fontSize = 30.sp,color = colorResource(id = R.color.fblaci) )
-                    IconButton(
-                        onClick = { showDialog = true },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.Top)
-                            .padding(start = 140.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.AddCircle,
-                            contentDescription = "Add location",
-                            modifier = Modifier.size(40.dp),
-                            colorResource(id = R.color.fblaci)
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.padding(7.dp))
-                Row (modifier = Modifier.padding(start = 6.dp)) {
-                    Text(text = "Home Address: ", fontWeight = FontWeight.Bold , fontSize = 20.sp,color = colorResource(id = R.color.fblaci))
-                    //In this place Users Home Address will be shown.
-                }
-                Spacer(modifier = Modifier.padding(5.dp))
-                Row (modifier = Modifier.padding(start = 6.dp , bottom = 10.dp )) {
-                    Text(text = "Workplace: ", fontWeight = FontWeight.Bold , fontSize = 20.sp,color = colorResource(id = R.color.fblaci))
-                    //In this place Users Workplace will be shown.
-                }
+            Spacer(modifier = Modifier.padding(5.dp))
+            Row (modifier = Modifier.padding(start = 6.dp)){
+                Text(
+                    text = "Name Surname: ",
+                    fontWeight = FontWeight.Bold ,
+                    fontSize = 20.sp,
+                    color = colorResource(id = R.color.fblaci)
+                )
+            //In this place Users Name And Surname will be shown.
             }
-            Spacer(modifier = Modifier.padding(20.dp))
-            Column (
-                horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
-            ) {
-                Button(onClick = { /*TODO*/ },
-                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci))
-                    ) {
-                    Text(text = "Sale History", fontWeight = FontWeight.Bold)
-                }
-                Spacer(modifier = Modifier.padding(10.dp))
-                Button(onClick = { /*TODO*/ },
-                        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci))
+            Spacer(modifier = Modifier.padding(5.dp))
+            Row (modifier = Modifier.padding(start = 6.dp)) {
+                Text(
+                    text = "E-mail: ",fontWeight = FontWeight.Bold ,
+                    fontSize = 20.sp,
+                    color = colorResource(id = R.color.fblaci)
+                )
+            //In this place Users e-Mail will be shown.
+            }
+            Spacer(modifier = Modifier.padding(5.dp))
+            Row (modifier = Modifier.padding(start = 6.dp , bottom = 10.dp)) {
+                Text(
+                    text = "Phone Number: ",
+                    fontWeight = FontWeight.Bold ,
+                    fontSize = 20.sp,
+                    color = colorResource(id = R.color.fblaci)
+                )
+            //In this place Users Phone Number will be shown.
+            }
+        }
+        Spacer(modifier = Modifier.padding(35.dp))
+        Column (
+            modifier = Modifier
+                .border(
+                    1.dp,
+                    color = colorResource(id = R.color.fblaci),
+                    shape = AbsoluteRoundedCornerShape(10.dp)
+                )
+                .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
+        )
+        {
+            Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
+                Text(text = "Locations", fontWeight = FontWeight.Bold, fontSize = 30.sp,color = colorResource(id = R.color.fblaci) )
+                IconButton(
+                    onClick = { showDialog = true },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Top)
+                        .padding(start = 140.dp)
                 ) {
-                    Text(
-                        text = "Purchase History",
-                        fontWeight = FontWeight.Bold
+                    Icon(
+                        imageVector = Icons.Default.AddCircle,
+                        contentDescription = "Add location",
+                        modifier = Modifier.size(40.dp),
+                        colorResource(id = R.color.fblaci)
                     )
                 }
-                Spacer(modifier = Modifier.padding(top = 100.dp))
-                Row (horizontalArrangement = Arrangement.SpaceEvenly,
-                    modifier = Modifier.fillMaxSize()) {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = Icons.Default.Home,
-                            contentDescription = "Main Menu",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.fblaci)
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.chat_icon),
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.fblaci)
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.camera_icon),
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.fblaci)
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = Icons.Default.Favorite,
-                            contentDescription = "Favoruites",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.fblaci)
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Profile",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.fblaci)
-                        )
-                    }
+            }
+            Spacer(modifier = Modifier.padding(7.dp))
+            Row (modifier = Modifier.padding(start = 6.dp)) {
+                Text(text = "Home Address: ", fontWeight = FontWeight.Bold , fontSize = 20.sp,color = colorResource(id = R.color.fblaci))
+            //In this place Users Home Address will be shown.
+            }
+            Spacer(modifier = Modifier.padding(5.dp))
+            Row (modifier = Modifier.padding(start = 6.dp , bottom = 10.dp )) {
+                Text(text = "Workplace: ", fontWeight = FontWeight.Bold , fontSize = 20.sp,color = colorResource(id = R.color.fblaci))
+            //In this place Users Workplace will be shown.
+            }
+        }
+        Spacer(modifier = Modifier.padding(20.dp))
+        Column (
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Button(onClick = { /*TODO*/ },
+                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci))
+            ) {
+                Text(text = "Sale History", fontWeight = FontWeight.Bold)
+            }
+            Spacer(modifier = Modifier.padding(10.dp))
+            Button(onClick = { /*TODO*/ },
+                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci))
+            ) {
+                Text(
+                    text = "Purchase History",
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Spacer(modifier = Modifier.padding(top = 100.dp))
+            Row (horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxSize()) {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Default.Home,
+                        contentDescription = "Main Menu",
+                        modifier = Modifier.size(100.dp),
+                        colorResource(id = R.color.fblaci)
+                    )
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.chat_icon),
+                        contentDescription = "",
+                        modifier = Modifier.size(100.dp),
+                        colorResource(id = R.color.fblaci)
+                    )
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.camera_icon),
+                        contentDescription = "",
+                        modifier = Modifier.size(100.dp),
+                        colorResource(id = R.color.fblaci)
+                    )
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = "Favoruites",
+                        modifier = Modifier.size(100.dp),
+                        colorResource(id = R.color.fblaci)
+                    )
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "Profile",
+                        modifier = Modifier.size(100.dp),
+                        colorResource(id = R.color.fblaci)
+                    )
                 }
             }
         }
     }
+}
 @Composable
 fun AlertDialog(
     onDismiss:() -> Unit
