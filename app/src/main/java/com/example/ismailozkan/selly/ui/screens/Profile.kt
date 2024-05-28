@@ -67,8 +67,8 @@ class Profile : ComponentActivity() {
 fun ProfileScreen() {
 
     val gradient = Brush.linearGradient(
-        0.0f to colorResource(id = R.color.fblaci),
-        500.0f to Color.White,
+        0.0f to Color.White,
+        500.0f to colorResource(id = R.color.fblaci),
         start = Offset.Zero,
         end = Offset.Infinite
     )
@@ -238,8 +238,8 @@ fun ProfileScreen() {
                     fontWeight = FontWeight.Bold
                 )
             }
-            Spacer(modifier = Modifier.padding(top = 100.dp))
             Row (horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.Bottom,
                 modifier = Modifier.fillMaxSize()) {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
