@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ismailozkan.selly.R
@@ -59,12 +60,7 @@ class Messages : ComponentActivity() {
 
 @Composable
 fun MessagesScreen() {
-    val gradient = Brush.linearGradient(
-        0.0f to Color.Magenta,
-        500.0f to colorResource(id = R.color.fblaci),
-        start = Offset.Zero,
-        end = Offset.Infinite
-    )
+    val gradient = Brush.linearGradient(listOf(colorResource(id = R.color.fblaci),Color.Yellow,Color.Magenta))
     val gradient2 = Brush.linearGradient(
         0.0f to Color.White,
         500.0f to Color.Gray,
@@ -258,7 +254,9 @@ fun MessagesScreen() {
             }
         }
     }
-
-
-
+}
+@Preview(showBackground = true)
+@Composable
+fun MessagesScreenPreview() {
+    MessagesScreen()
 }

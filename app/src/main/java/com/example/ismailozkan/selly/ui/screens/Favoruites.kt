@@ -232,7 +232,7 @@ fun FavoruitesScreen() {
         }
     }
 }
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun FavoruitesScreenPreview(){
     FavoruitesScreen()

@@ -260,7 +260,7 @@ fun AdvertisementScreen() {
         }
     }
 }
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun AdvertisementScreenPreview(){
     AdvertisementScreen()

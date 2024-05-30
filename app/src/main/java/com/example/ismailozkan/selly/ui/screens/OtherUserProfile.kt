@@ -51,7 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ismailozkan.selly.R
 
-class Profile : ComponentActivity() {
+class OtherUserProfile : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -65,7 +65,7 @@ class Profile : ComponentActivity() {
     }
 }
 @Composable
-fun ProfileScreen() {
+fun OtherUserProfileScreen() {
 
     val gradient = Brush.linearGradient(listOf(colorResource(id = R.color.fblaci),Color.White))
     val gradient2 = Brush.linearGradient(
@@ -98,7 +98,7 @@ fun ProfileScreen() {
         }
     }
     Column(
-        modifier = Modifier.padding(start =10.dp , top = 150.dp, end = 10.dp),
+        modifier = Modifier.padding(start = 10.dp , top = 150.dp, end = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column (
@@ -110,7 +110,12 @@ fun ProfileScreen() {
                 )
                 .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
         ) {
-            Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
+            Row (
+                modifier = Modifier
+                    .padding(start = 6.dp , top = 10.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.pp_icon),
                     contentDescription = "Profile Picture",
@@ -132,20 +137,6 @@ fun ProfileScreen() {
                         )
                     }
                 }
-                IconButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.Top)
-                        .padding(end = 16.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Edit,
-                        contentDescription = "Edit",
-                        modifier = Modifier.size(40.dp),
-                        colorResource(id = R.color.fblaci)
-                    )
-                }
             }
             Spacer(modifier = Modifier.padding(5.dp))
             Row (modifier = Modifier.padding(start = 6.dp)){
@@ -155,7 +146,7 @@ fun ProfileScreen() {
                     fontSize = 20.sp,
                     color = colorResource(id = R.color.fblaci)
                 )
-            //In this place Users Name And Surname will be shown.
+                //In this place Users Name And Surname will be shown.
             }
             Spacer(modifier = Modifier.padding(5.dp))
             Row (modifier = Modifier.padding(start = 6.dp)) {
@@ -164,7 +155,7 @@ fun ProfileScreen() {
                     fontSize = 20.sp,
                     color = colorResource(id = R.color.fblaci)
                 )
-            //In this place Users e-Mail will be shown.
+                //In this place Users e-Mail will be shown.
             }
             Spacer(modifier = Modifier.padding(5.dp))
             Row (modifier = Modifier.padding(start = 6.dp , bottom = 10.dp)) {
@@ -174,7 +165,7 @@ fun ProfileScreen() {
                     fontSize = 20.sp,
                     color = colorResource(id = R.color.fblaci)
                 )
-            //In this place Users Phone Number will be shown.
+                //In this place Users Phone Number will be shown.
             }
         }
         Spacer(modifier = Modifier.padding(35.dp))
@@ -188,32 +179,18 @@ fun ProfileScreen() {
                 .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
         )
         {
-            Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
+            Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp).fillMaxWidth()) {
                 Text(text = "Locations", fontWeight = FontWeight.Bold, fontSize = 30.sp,color = colorResource(id = R.color.fblaci) )
-                IconButton(
-                    onClick = { showDialog = true },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.Top)
-                        .padding(start = 140.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.AddCircle,
-                        contentDescription = "Add location",
-                        modifier = Modifier.size(40.dp),
-                        colorResource(id = R.color.fblaci)
-                    )
-                }
             }
             Spacer(modifier = Modifier.padding(7.dp))
             Row (modifier = Modifier.padding(start = 6.dp)) {
                 Text(text = "Home Address: ", fontWeight = FontWeight.Bold , fontSize = 20.sp,color = colorResource(id = R.color.fblaci))
-            //In this place Users Home Address will be shown.
+                //In this place Users Home Address will be shown.
             }
             Spacer(modifier = Modifier.padding(5.dp))
             Row (modifier = Modifier.padding(start = 6.dp , bottom = 10.dp )) {
                 Text(text = "Workplace: ", fontWeight = FontWeight.Bold , fontSize = 20.sp,color = colorResource(id = R.color.fblaci))
-            //In this place Users Workplace will be shown.
+                //In this place Users Workplace will be shown.
             }
         }
         Spacer(modifier = Modifier.padding(20.dp))
@@ -282,65 +259,9 @@ fun ProfileScreen() {
         }
     }
 }
-@Composable
-fun AlertDialog(
-    onDismiss:() -> Unit
-) {
-    var string1 by remember {
-        mutableStateOf("")
-    }
-    var string2 by remember {
-        mutableStateOf("")
-    }
-    androidx.compose.material3.AlertDialog(
-
-
-        onDismissRequest = onDismiss,
-        confirmButton = { /*TODO*/ },
-        modifier = Modifier.height(300.dp),
-        title = {
-            Column (
-                horizontalAlignment = Alignment.CenterHorizontally
-            )
-            {
-                Text(text = "Add Location" , fontSize = 20.sp)
-                OutlinedTextField(
-                    value = string1,
-                    onValueChange = {string1 = it},
-                    label = {
-                        Text(text = "Home Address: ",color = colorResource(id = R.color.fblaci))
-                    },modifier = Modifier
-                        .fillMaxWidth(),
-                    singleLine = true
-                )
-                Spacer(modifier = Modifier.padding(5.dp))
-                OutlinedTextField(
-                    value = string2,
-                    onValueChange = {string2 = it},
-                    label = {
-                        Text(text = "Workplace: ",color = colorResource(id = R.color.fblaci))
-                    },modifier = Modifier
-                        .fillMaxWidth(),
-                    singleLine = true
-                )
-                Spacer(modifier = Modifier.padding(5.dp))
-                Button(
-                    onClick = { /*TODO*/ },
-                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci)),
-                    modifier = Modifier.size(150.dp)
-                )
-                {
-                    Text(text = "Save" , fontWeight = FontWeight.Bold)
-                }
-            }
-        }
-
-    )
-}
-
 
 @Preview(showBackground = true)
 @Composable
-fun ProfileScreenPreview(){
-    ProfileScreen()
+fun OtherUserProfileScreenPreview(){
+    OtherUserProfileScreen()
 }
