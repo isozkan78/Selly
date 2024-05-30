@@ -9,9 +9,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.ismailozkan.selly.ui.screens.AdvertisementScreen
-import com.example.ismailozkan.selly.ui.screens.MessagesScreen
-import com.example.ismailozkan.selly.ui.screens.OtherUserProfileScreen
 import com.example.ismailozkan.selly.ui.screens.ProfileScreen
 import com.example.ismailozkan.selly.ui.theme.SellyTheme
 
@@ -25,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    OtherUserProfileScreen()
+                    ProfileScreen()
                 }
             }
         }

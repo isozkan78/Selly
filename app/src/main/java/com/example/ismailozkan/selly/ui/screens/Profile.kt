@@ -23,8 +23,6 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -77,15 +75,15 @@ fun ProfileScreen() {
 
     Box(modifier = Modifier.background(gradient))
 
-    val starCount = 5
-    val selectedStars = 3
     var showDialog by remember { mutableStateOf(false) }
     if (showDialog) {
         AlertDialog (onDismiss = {showDialog = false})
     }
     Row (
         horizontalArrangement = Arrangement.Center,
-        modifier = Modifier.padding(top = 40.dp)
+        modifier = Modifier
+            .padding(top = 40.dp)
+            .fillMaxWidth()
     ){
         Text(
             text = "Profile",
@@ -93,8 +91,14 @@ fun ProfileScreen() {
             fontSize = 40.sp,
             color = colorResource(id = R.color.fblaci)
         )
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(painter = painterResource(id = R.drawable.selly), contentDescription = "", modifier = Modifier.size(150.dp))
+        Row (horizontalArrangement = Arrangement.End) {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.selly),
+                    contentDescription = "",
+                    modifier = Modifier.size(150.dp)
+                )
+            }
         }
     }
     Column(
@@ -110,34 +114,19 @@ fun ProfileScreen() {
                 )
                 .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
         ) {
-            Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
+            Row (modifier = Modifier
+                .padding(start = 6.dp, top = 10.dp)
+                .fillMaxWidth() , horizontalArrangement = Arrangement.Absolute.SpaceBetween)
+            {
                 Icon(
                     painter = painterResource(id = R.drawable.pp_icon),
                     contentDescription = "Profile Picture",
                     modifier = Modifier.size(60.dp),
-                    colorResource(id = R.color.fblaci)
+                    tint = colorResource(id = R.color.fblaci)
                 )
-                repeat(starCount) { index ->
-                    IconButton(
-                        onClick = { /* Handle star click for index */ }
-                    ) {
-                        Icon(
-                            imageVector = if (index < selectedStars) {
-                                Icons.Filled.Star
-                            } else {
-                                Icons.Outlined.Star },
-                            contentDescription = "Star Rating ${index + 1}",
-                            modifier = Modifier.fillMaxSize(),
-                            colorResource(id = R.color.fblaci)
-                        )
-                    }
-                }
+
                 IconButton(
                     onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.Top)
-                        .padding(end = 16.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Edit,
@@ -188,20 +177,18 @@ fun ProfileScreen() {
                 .background(gradient2, shape = AbsoluteRoundedCornerShape(10.dp))
         )
         {
-            Row (modifier = Modifier.padding(start = 6.dp , top = 10.dp)) {
+            Row (modifier = Modifier
+                .padding(start = 6.dp, top = 10.dp)
+                .fillMaxWidth() , horizontalArrangement = Arrangement.Absolute.SpaceBetween) {
                 Text(text = "Locations", fontWeight = FontWeight.Bold, fontSize = 30.sp,color = colorResource(id = R.color.fblaci) )
                 IconButton(
-                    onClick = { showDialog = true },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.Top)
-                        .padding(start = 140.dp)
+                    onClick = { showDialog = true }
                 ) {
                     Icon(
                         imageVector = Icons.Default.AddCircle,
                         contentDescription = "Add location",
                         modifier = Modifier.size(40.dp),
-                        colorResource(id = R.color.fblaci)
+                        tint = colorResource(id = R.color.fblaci)
                     )
                 }
             }
