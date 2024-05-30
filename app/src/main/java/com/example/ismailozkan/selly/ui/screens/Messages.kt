@@ -60,7 +60,7 @@ class Messages : ComponentActivity() {
 @Composable
 fun MessagesScreen() {
     val gradient = Brush.linearGradient(
-        0.0f to Color.White,
+        0.0f to Color.Magenta,
         500.0f to colorResource(id = R.color.fblaci),
         start = Offset.Zero,
         end = Offset.Infinite

@@ -50,7 +50,7 @@ import com.example.ismailozkan.selly.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AdvertisementScreen() {
+fun FavoruitesScreen() {
 
     val gradient = Brush.linearGradient(listOf(colorResource(id = R.color.fblaci),Color.White))
     val gradientBlue = Brush.linearGradient(
@@ -69,16 +69,16 @@ fun AdvertisementScreen() {
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
-                    containerColor = Color.Transparent,
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary
-                    ),
+                ),
                 title = {
                     Row (
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center,
-                        ) {
+                    ) {
                         //Spacer(modifier = Modifier.weight(1f))
-                        Text("Ads", fontWeight = FontWeight.Bold, modifier = Modifier, fontSize = 30.sp)
+                        Text("My Favoruites", fontWeight = FontWeight.Bold, modifier = Modifier, fontSize = 30.sp)
                         //Spacer(modifier = Modifier.weight(1f))
                     }
                     Row ( horizontalArrangement = Arrangement.End,
@@ -147,34 +147,6 @@ fun AdvertisementScreen() {
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row (){
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .background(brush = gradientBlue, shape = RectangleShape)
-                        .width(210.dp)
-                    ,
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Text(text = "My Advertisements",
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-                }
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .background(brush = gradientYellow, shape = RectangleShape)
-                        .width(210.dp)
-                    ,
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                    ) {
-                    Text(text = "Fav Advertisements",
-                        fontWeight = FontWeight.Bold,
-                            color = Color.Black
-                    )
-                }
-            }
             Column (horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier
@@ -262,6 +234,6 @@ fun AdvertisementScreen() {
 }
 @Preview
 @Composable
-fun AdvertisementScreenPreview(){
-    AdvertisementScreen()
+fun FavoruitesScreenPreview(){
+    FavoruitesScreen()
 }

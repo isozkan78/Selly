@@ -46,6 +46,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ismailozkan.selly.R
@@ -66,12 +67,7 @@ class Profile : ComponentActivity() {
 @Composable
 fun ProfileScreen() {
 
-    val gradient = Brush.linearGradient(
-        0.0f to Color.White,
-        500.0f to colorResource(id = R.color.fblaci),
-        start = Offset.Zero,
-        end = Offset.Infinite
-    )
+    val gradient = Brush.linearGradient(listOf(colorResource(id = R.color.fblaci),Color.White))
     val gradient2 = Brush.linearGradient(
         0.0f to Color.White,
         500.0f to Color.Gray,
@@ -102,7 +98,8 @@ fun ProfileScreen() {
         }
     }
     Column(
-        modifier = Modifier.padding(start =10.dp , top = 150.dp)
+        modifier = Modifier.padding(start =10.dp , top = 150.dp, end = 10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column (
             modifier = Modifier
@@ -339,4 +336,11 @@ fun AlertDialog(
         }
 
     )
+}
+
+
+@Preview
+@Composable
+fun ProfileScreenPreview(){
+    ProfileScreen()
 }
