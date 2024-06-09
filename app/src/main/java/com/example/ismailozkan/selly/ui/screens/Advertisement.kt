@@ -139,8 +139,7 @@ fun AdvertisementScreen() {
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding)
-                .background(brush = gradient),
+                .padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
