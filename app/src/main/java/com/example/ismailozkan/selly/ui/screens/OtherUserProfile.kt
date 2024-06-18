@@ -72,9 +72,9 @@ fun OtherUserProfileScreen() {
     )
 
     Box(modifier = Modifier.background(gradient))
-
     val starCount = 5
     val selectedStars = 3
+
     var showDialog by remember { mutableStateOf(false) }
     if (showDialog) {
         AlertDialog (onDismiss = {showDialog = false})

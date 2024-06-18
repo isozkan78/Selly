@@ -16,7 +16,9 @@ class MainViewModel : ViewModel() {
     private val defaultProducts = listOf(
         Product("Product 1", painter = R.drawable.terlikimage),
         Product("Product 2", painter = R.drawable.terlikimage),
-        Product("Product 3", painter = R.drawable.terlikimage)
+        Product("Product 3", painter = R.drawable.terlikimage),
+        Product("Product 4", painter = R.drawable.terlikimage),
+        Product("Product 5", painter = R.drawable.terlikimage)
     )
 
     private val _items = MutableStateFlow(defaultProducts)

@@ -11,14 +11,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -35,7 +34,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -43,13 +41,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.ismailozkan.selly.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AdvertisementScreen(navController: NavController) {
+fun PurchaseHistoryScreen(navController: NavHostController) {
+
+    val starCount = 5
+    val selectedStars = 3
 
     val gradient = Brush.linearGradient(listOf(colorResource(id = R.color.fblaci),Color.White))
     val gradientBlue = Brush.linearGradient(
@@ -68,15 +69,15 @@ fun AdvertisementScreen(navController: NavController) {
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
-                    containerColor = Color.Transparent,
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary
-                    ),
+                ),
                 title = {
                     Row (
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center,
-                        ) {
-                        Text("My Ads", fontWeight = FontWeight.Bold, modifier = Modifier, fontSize = 30.sp)
+                    ) {
+                        Text("Purchase History", fontWeight = FontWeight.Bold, modifier = Modifier, fontSize = 30.sp)
                     }
                     Row ( horizontalArrangement = Arrangement.End,
                         modifier = Modifier.fillMaxWidth()){
@@ -139,38 +140,11 @@ fun AdvertisementScreen(navController: NavController) {
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .background(brush = gradient),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row (){
-                Button(
-                    onClick = { navController.navigate("MyAdvertisements") },
-                    modifier = Modifier
-                        .background(brush = gradientBlue, shape = RectangleShape)
-                        .width(210.dp)
-                    ,
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Text(text = "My Advertisements",
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-                }
-                Button(
-                    onClick = { navController.navigate("Favourite Ads") },
-                    modifier = Modifier
-                        .background(brush = gradientYellow, shape = RectangleShape)
-                        .width(210.dp)
-                    ,
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                    ) {
-                    Text(text = "Fav Advertisements",
-                        fontWeight = FontWeight.Bold,
-                            color = Color.Black
-                    )
-                }
-            }
             Column (horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier
@@ -187,7 +161,8 @@ fun AdvertisementScreen(navController: NavController) {
                 )
                 {
                     Row (horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()){
+                        modifier = Modifier.fillMaxWidth())
+                    {
                         Image(
                             painter = painterResource(id = R.drawable.terlikimage),
                             contentDescription = "terlik",
@@ -195,6 +170,23 @@ fun AdvertisementScreen(navController: NavController) {
                         )
                         Text(text = "Location", modifier = Modifier.padding(5.dp))
                         Text(text = "Product Name", modifier = Modifier.padding(5.dp))
+                    }
+                    Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                        repeat(starCount) { index ->
+                            IconButton(
+                                onClick = { /* Handle star click for index */ }
+                            ) {
+                                Icon(
+                                    imageVector = if (index < selectedStars) {
+                                        Icons.Filled.Star
+                                    } else {
+                                        Icons.Outlined.Star },
+                                    contentDescription = "Star Rating ${index + 1}",
+                                    modifier = Modifier.fillMaxSize(),
+                                    colorResource(id = R.color.fblaci)
+                                )
+                            }
+                        }
                     }
                     Text(
                         text = "Price",
@@ -219,6 +211,23 @@ fun AdvertisementScreen(navController: NavController) {
                         )
                         Text(text = "Location", modifier = Modifier.padding(5.dp))
                         Text(text = "Product Name", modifier = Modifier.padding(5.dp))
+                    }
+                    Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                        repeat(starCount) { index ->
+                            IconButton(
+                                onClick = { /* Handle star click for index */ }
+                            ) {
+                                Icon(
+                                    imageVector = if (index < selectedStars) {
+                                        Icons.Filled.Star
+                                    } else {
+                                        Icons.Outlined.Star },
+                                    contentDescription = "Star Rating ${index + 1}",
+                                    modifier = Modifier.fillMaxSize(),
+                                    colorResource(id = R.color.fblaci)
+                                )
+                            }
+                        }
                     }
                     Text(
                         text = "Price",
@@ -245,6 +254,23 @@ fun AdvertisementScreen(navController: NavController) {
                         Text(text = "Location", modifier = Modifier.padding(5.dp))
                         Text(text = "Product Name" , modifier = Modifier.padding(5.dp))
                     }
+                    Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                        repeat(starCount) { index ->
+                            IconButton(
+                                onClick = { /* Handle star click for index */ }
+                            ) {
+                                Icon(
+                                    imageVector = if (index < selectedStars) {
+                                        Icons.Filled.Star
+                                    } else {
+                                        Icons.Outlined.Star },
+                                    contentDescription = "Star Rating ${index + 1}",
+                                    modifier = Modifier.fillMaxSize(),
+                                    colorResource(id = R.color.fblaci)
+                                )
+                            }
+                        }
+                    }
                     Text(
                         text = "Price",
                         modifier = Modifier
@@ -258,6 +284,9 @@ fun AdvertisementScreen(navController: NavController) {
 }
 @Preview(showBackground = true)
 @Composable
-fun AdvertisementScreenPreview(){
-    AdvertisementScreen(navController = rememberNavController())
+fun PurchaseHistoryScreenPreview(){
+    PurchaseHistoryScreen(navController = rememberNavController())
 }
+
+
+
