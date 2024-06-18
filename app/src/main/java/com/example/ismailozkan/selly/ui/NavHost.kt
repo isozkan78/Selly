@@ -1,3 +1,4 @@
+
 package com.example.ismailozkan.selly.ui
 
 import androidx.compose.runtime.Composable
@@ -14,17 +15,17 @@ import com.example.ismailozkan.selly.ui.screens.MessagesScreen
 fun MyNavHost(navController: NavHostController, starDest: String) {
     NavHost(navController = navController, startDestination = starDest) {
         composable(route = "Main Menu") {
-            MainMenu(navController = navController)
+           MainScreen(navController = navController)
         }
         composable(route = "Edit Profile") {
             EditProfileScreen(navController = navController)
         }
-        composable(route = "Sale History") {
-            SaleHistory(navController = navController)
-        }
-        composable(route = "Purchase History") {
-            PurchaseHistory(navController = navController)
-        }
+       // composable(route = "Sale History") {
+      //      SaleHistory(navController = navController)
+       // }
+      //  composable(route = "Purchase History") {
+       //     PurchaseHistory(navController = navController)
+       // }
         composable(route = "Messages") {
             MessagesScreen(navController = navController)
         }

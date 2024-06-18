@@ -137,7 +137,7 @@ fun LogInScreen(navController: NavController){
                     Text(text = "Sign Up", color = colorResource(id = R.color.fblaci))
 
                 }
-                Button(onClick = { /*TODO*/ },
+                Button(onClick = { navController.navigate("Main Menu") },
                     colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci))) {
                     Text(text = "Sign In")
                 }
