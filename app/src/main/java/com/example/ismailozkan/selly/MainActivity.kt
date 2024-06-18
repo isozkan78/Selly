@@ -9,20 +9,22 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.ismailozkan.selly.ui.screens.MessagesScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.ismailozkan.selly.ui.MyNavHost
 import com.example.ismailozkan.selly.ui.theme.SellyTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
             SellyTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MessagesScreen()
+                    MyNavHost(navController = navController, starDest = "LogIn")
                 }
             }
         }

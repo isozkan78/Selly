@@ -39,11 +39,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.ismailozkan.selly.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoruitesScreen() {
+fun FavoruitesScreen(navController: NavHostController) {
 
     val gradient = Brush.linearGradient(listOf(colorResource(id = R.color.fblaci),Color.White))
     val gradientBlue = Brush.linearGradient(
@@ -228,5 +230,5 @@ fun FavoruitesScreen() {
 @Preview(showBackground = true)
 @Composable
 fun FavoruitesScreenPreview(){
-    FavoruitesScreen()
+    FavoruitesScreen(navController = rememberNavController())
 }

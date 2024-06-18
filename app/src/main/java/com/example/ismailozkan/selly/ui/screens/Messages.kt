@@ -37,6 +37,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.ismailozkan.selly.R
 
 class Messages : ComponentActivity() {
@@ -48,7 +50,6 @@ class Messages : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                MessagesScreen()
             }
         }
     }
@@ -57,7 +58,7 @@ class Messages : ComponentActivity() {
 
 
 @Composable
-fun MessagesScreen() {
+fun MessagesScreen(navController: NavController) {
     val gradient = Brush.linearGradient(listOf(colorResource(id = R.color.fblaci),Color.Yellow,Color.Magenta))
     val gradient2 = Brush.linearGradient(
         0.0f to Color.White,
@@ -256,5 +257,5 @@ fun MessagesScreen() {
 @Preview(showBackground = true)
 @Composable
 fun MessagesScreenPreview() {
-    MessagesScreen()
+    MessagesScreen(navController = rememberNavController())
 }
