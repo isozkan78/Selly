@@ -77,7 +77,7 @@ fun SaleHistoryScreen(navController: NavHostController) {
                     Row ( horizontalArrangement = Arrangement.End,
                         modifier = Modifier.fillMaxWidth()){
                         IconButton(onClick = { navController.navigate("Main Menu") }) {
-                            Icon(
+                            Image(
                                 painter = painterResource(id = R.drawable.selly),
                                 contentDescription = "Selly"
                             )

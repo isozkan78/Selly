@@ -1,6 +1,7 @@
 package com.example.ismailozkan.selly.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -41,7 +42,7 @@ fun MainScreen(navController: NavController , viewModel: MainViewModel = viewMod
             onSearch = { viewModel.performSearch() }
         )
         Spacer(modifier = Modifier.height(16.dp))
-        ItemList(items = items)
+        ItemList(items = items , navController)
     }
 }
 
@@ -67,7 +68,7 @@ fun SearchBar(
 }
 
 @Composable
-fun ItemList(items: List<Product>) {
+fun ItemList(items: List<Product> , navController: NavController) {
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]
@@ -75,6 +76,9 @@ fun ItemList(items: List<Product>) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
+                    .clickable {
+                        navController.navigate("Buy $item")
+                    }
             ) {
                 Image(
                     painter = rememberImagePainter(item.painter),

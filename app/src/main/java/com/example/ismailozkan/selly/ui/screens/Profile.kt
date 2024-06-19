@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -89,7 +90,7 @@ fun ProfileScreen(navController : NavHostController) {
                 fontSize = 35.sp
             )
             IconButton(onClick = {navController.navigate("Main Menu")}) {
-                Icon(
+                Image(
                     painter = painterResource(id = R.drawable.selly),
                     contentDescription = "",
                     modifier = Modifier.size(150.dp)
