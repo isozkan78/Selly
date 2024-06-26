@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -51,7 +52,7 @@ android {
 
 
 dependencies {
-    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation(libs.coil.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -70,6 +71,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 dependencies {
+    implementation(libs.firebase.database)
     val nav_version = "2.7.7"
 
     // Java language implementation

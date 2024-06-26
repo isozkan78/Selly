@@ -31,10 +31,12 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -87,11 +89,12 @@ fun SaleScreen(){
             ), contentAlignment = Alignment.Center
         ){
             val notification= rememberSaveable { mutableStateOf("") }
+            var isClicked = false
             if (notification.value.isNotEmpty()){
                 Toast.makeText(LocalContext.current, notification.value, Toast.LENGTH_LONG).show()
                 notification.value=""
             }
-            var price by rememberSaveable { mutableStateOf("") }
+            var price by rememberSaveable { mutableIntStateOf(0)}
             var stuffname by rememberSaveable { mutableStateOf("") }
             var description by rememberSaveable { mutableStateOf("") }
             var location by rememberSaveable { mutableStateOf("") }
@@ -108,7 +111,7 @@ fun SaleScreen(){
                     .padding(start = 4.dp, end = 4.dp),
                     verticalAlignment = Alignment.CenterVertically){
                     Text(text = "Price", modifier = Modifier.width(100.dp), color = colorResource(id = R.color.fblaci))
-                    OutlinedTextField(value = price, onValueChange = {price=it},
+                    OutlinedTextField(value = price, onValueChange = {price=price},
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = colorResource(id = R.color.fblaci),
                             unfocusedBorderColor = Color.White))
@@ -143,8 +146,10 @@ fun SaleScreen(){
                 }
                 Spacer(modifier = Modifier.padding(16.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                    Button(onClick = { notification.value = "Published" },
-                        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci)), modifier = Modifier,) {
+                    Button(
+                        onClick = { isClicked = true  },
+                        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci))
+                    ) {
                         Text(text = "Publish")
                     }
                 }
@@ -155,8 +160,8 @@ fun SaleScreen(){
     }
 }
 
-
-
+fun OutlinedTextField(value: Int, onValueChange: () -> Unit, colors: TextFieldColors) {
+}
 
 
 @Composable

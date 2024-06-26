@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.ismailozkan.selly.ui.MyNavHost
 import com.example.ismailozkan.selly.ui.theme.SellyTheme
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MyNavHost(navController = navController, starDest = "LogIn")
+                    MyNavHost(navController = navController, starDest = "SplashScreen")
                 }
             }
         }

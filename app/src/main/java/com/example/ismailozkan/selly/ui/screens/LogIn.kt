@@ -132,7 +132,7 @@ fun LogInScreen(navController: NavController){
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly) {
                 OutlinedButton(onClick = {
-                    navController.navigate("signinpage")
+                    navController.navigate("signuppage")
                 },
                 ) {
                     Modifier.weight(50f)

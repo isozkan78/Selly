@@ -6,12 +6,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.ismailozkan.selly.ui.screens.AdvertisementScreen
+import com.example.ismailozkan.selly.ui.screens.AnimatedSplashScreen
 import com.example.ismailozkan.selly.ui.screens.EditProfileScreen
 import com.example.ismailozkan.selly.ui.screens.FavoruitesScreen
 import com.example.ismailozkan.selly.ui.screens.LogInScreen
 import com.example.ismailozkan.selly.ui.screens.MessagesScreen
 import com.example.ismailozkan.selly.ui.screens.ProfileScreen
 import com.example.ismailozkan.selly.ui.screens.SaleHistoryScreen
+import com.example.ismailozkan.selly.ui.screens.Splash
 
 
 @Composable
@@ -43,6 +45,9 @@ fun MyNavHost(navController: NavHostController, starDest: String) {
         }
         composable(route = "MyAdvertisements") {
             AdvertisementScreen(navController = navController)
+        }
+        composable(route = "SplashScreen") {
+            AnimatedSplashScreen(navController = navController)
         }
     }
 }
