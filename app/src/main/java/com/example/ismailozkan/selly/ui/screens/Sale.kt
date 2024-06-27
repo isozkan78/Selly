@@ -27,6 +27,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -34,6 +35,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -48,38 +50,52 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.ismailozkan.selly.R
+import com.example.ismailozkan.selly.ui.BottomBar
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun SaleScreen(){
+fun SaleScreen(navController: NavHostController){
 
-    Scaffold(topBar = {
-        TopAppBar(
-            title = {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Spacer(modifier = Modifier.padding(20.dp) )
-                    Text(text = "Sale Screen", color = Color.White)
-                    IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(48.dp)) {
-                        Image(painter = painterResource(id = R.drawable.selly), contentDescription = "")
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary
+                ),
+                title = {
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        Text("Sell", fontWeight = FontWeight.Bold, modifier = Modifier, fontSize = 30.sp)
+                    }
+                    Row ( horizontalArrangement = Arrangement.End,
+                        modifier = Modifier.fillMaxWidth()){
+                        IconButton(onClick = { navController.navigate("Main Menu") }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.selly),
+                                contentDescription = "Selly"
+                            )
+                        }
                     }
                 }
+            )
+        },
+        bottomBar = { BottomBar(navController = navController)}
 
-            }
-        )
-
-
-
-    }) {
+    ) {
         Box (modifier = Modifier
             .fillMaxSize()
             .background(
@@ -201,5 +217,5 @@ fun StuffImage(){
 @Preview
 @Composable
 fun preview(){
-    SaleScreen()
+    SaleScreen(navController = rememberNavController())
 }

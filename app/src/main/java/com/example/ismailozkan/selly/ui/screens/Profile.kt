@@ -26,12 +26,16 @@ import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,6 +57,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.ismailozkan.selly.R
+import com.example.ismailozkan.selly.ui.BottomBar
 
 class Profile : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +72,7 @@ class Profile : ComponentActivity() {
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(navController : NavHostController) {
 
@@ -77,211 +83,182 @@ fun ProfileScreen(navController : NavHostController) {
     if (showDialog) {
         AlertDialog(onDismiss = { showDialog = false })
     }
-    Box(modifier = Modifier.background(gradient)) {
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Brush.linearGradient(listOf(Color.White, Color.LightGray))),
-            horizontalArrangement = Arrangement.Absolute.SpaceBetween
-        ){
-            Text(
-                text = "Profile",
-                fontWeight = FontWeight.Bold,
-                fontSize = 35.sp
-            )
-            IconButton(onClick = {navController.navigate("Main Menu")}) {
-                Image(
-                    painter = painterResource(id = R.drawable.selly),
-                    contentDescription = "",
-                    modifier = Modifier.size(150.dp)
-                )
-            }
-        }
-        Column(
-            modifier = Modifier.padding(start = 10.dp, top = 150.dp, end = 10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Column(
-                modifier = Modifier
-                    .border(
-                        1.dp,
-                        color = colorResource(id = R.color.fblaci),
-                        shape = RectangleShape
-                    )
-                    .background(gradient2, shape = RectangleShape)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .padding(start = 6.dp, top = 10.dp)
-                        .fillMaxWidth(), horizontalArrangement = Arrangement.Absolute.SpaceBetween
-                )
-                {
-                    Icon(
-                        painter = painterResource(id = R.drawable.pp_icon),
-                        contentDescription = "Profile Picture",
-                        modifier = Modifier.size(60.dp)
-                    )
-
-                    IconButton(
-                        onClick = {navController.navigate("Edit Profile")},
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = "Edit",
-                            modifier = Modifier.size(40.dp)
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.padding(5.dp))
-                Row(modifier = Modifier.padding(start = 6.dp)) {
-                    Text(
-                        text = "Name Surname: ",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
-                    )
-                    //In this place Users Name And Surname will be shown.
-                }
-                Spacer(modifier = Modifier.padding(5.dp))
-                Row(modifier = Modifier.padding(start = 6.dp)) {
-                    Text(
-                        text = "E-mail: ", fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
-                    )
-                    //In this place Users e-Mail will be shown.
-                }
-                Spacer(modifier = Modifier.padding(5.dp))
-                Row(modifier = Modifier.padding(start = 6.dp, bottom = 10.dp)) {
-                    Text(
-                        text = "Phone Number: ",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
-                    )
-                    //In this place Users Phone Number will be shown.
-                }
-            }
-            Spacer(modifier = Modifier.padding(10.dp))
-            Column(
-                modifier = Modifier
-                    .border(
-                        1.dp,
-                        color = colorResource(id = R.color.fblaci),
-                        shape = RectangleShape
-                    )
-                    .background(gradient2, shape = RectangleShape)
-            )
-            {
-                Row(
-                    modifier = Modifier
-                        .padding(start = 6.dp, top = 10.dp)
-                        .fillMaxWidth(), horizontalArrangement = Arrangement.Absolute.SpaceBetween
-                ) {
-                    Text(text = "Locations", fontWeight = FontWeight.Bold, fontSize = 30.sp)
-                    IconButton(
-                        onClick = { showDialog = true }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.AddCircle,
-                            contentDescription = "Add location",
-                            modifier = Modifier.size(40.dp)
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.padding(7.dp))
-                Row(modifier = Modifier.padding(start = 6.dp)) {
-                    Text(text = "Home Address: ", fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                    //In this place Users Home Address will be shown.
-                }
-                Spacer(modifier = Modifier.padding(5.dp))
-                Row(modifier = Modifier.padding(start = 6.dp, bottom = 10.dp)) {
-                    Text(text = "Workplace: ", fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                    //In this place Users Workplace will be shown.
-                }
-            }
-            Spacer(modifier = Modifier.padding(20.dp))
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Button(
-                    onClick = { navController.navigate("Sale History") },
-                    colors = ButtonDefaults.buttonColors(Color.Transparent),
-                    shape = RectangleShape,
-                    modifier = Modifier
-                        .background(gradient2)
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Sale History",
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Start,
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary
+                ),
+                title = {
+                    Row (
                         modifier = Modifier.fillMaxWidth(),
-                        color = Color.Black
-                    )
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowRight,
-                        contentDescription = "",
-                        modifier = Modifier.size(10.dp),
-
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        Text("My Ads", fontWeight = FontWeight.Bold, modifier = Modifier, fontSize = 30.sp)
+                    }
+                    Row ( horizontalArrangement = Arrangement.End,
+                        modifier = Modifier.fillMaxWidth()){
+                        IconButton(onClick = { navController.navigate("Main Menu") }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.selly),
+                                contentDescription = "Selly"
+                            )
+                        }
+                    }
+                }
+            )
+        },
+        bottomBar = { BottomBar(navController = navController) }
+    )
+    { innerPadding ->
+        Box(modifier = Modifier.background(gradient).padding(innerPadding)) {
+            Column(
+                modifier = Modifier.padding(start = 10.dp, top = 50.dp, end = 10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Column(
+                    modifier = Modifier
+                        .border(
+                            1.dp,
+                            color = colorResource(id = R.color.fblaci),
+                            shape = RectangleShape
                         )
+                        .background(gradient2, shape = RectangleShape)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .padding(start = 6.dp, top = 10.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Absolute.SpaceBetween
+                    )
+                    {
+                        Icon(
+                            painter = painterResource(id = R.drawable.pp_icon),
+                            contentDescription = "Profile Picture",
+                            modifier = Modifier.size(60.dp)
+                        )
+
+                        IconButton(
+                            onClick = { navController.navigate("Edit Profile") },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "Edit",
+                                modifier = Modifier.size(40.dp)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.padding(5.dp))
+                    Row(modifier = Modifier.padding(start = 6.dp)) {
+                        Text(
+                            text = "Name Surname: ",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+                        )
+                        //In this place Users Name And Surname will be shown.
+                    }
+                    Spacer(modifier = Modifier.padding(5.dp))
+                    Row(modifier = Modifier.padding(start = 6.dp)) {
+                        Text(
+                            text = "E-mail: ", fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+                        )
+                        //In this place Users e-Mail will be shown.
+                    }
+                    Spacer(modifier = Modifier.padding(5.dp))
+                    Row(modifier = Modifier.padding(start = 6.dp, bottom = 10.dp)) {
+                        Text(
+                            text = "Phone Number: ",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+                        )
+                        //In this place Users Phone Number will be shown.
+                    }
                 }
                 Spacer(modifier = Modifier.padding(10.dp))
-                Button(
-                    onClick = { navController.navigate("Purchase History") },
-                    colors = ButtonDefaults.buttonColors(Color.Transparent),
-                    shape = RectangleShape,
-                    modifier = Modifier.background(gradient2)
-                ) {
-                    Text(
-                        text = "Purchase History",
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Start,
-                        modifier = Modifier.fillMaxWidth(),
-                        color = Color.Black
-                    )
+                Column(
+                    modifier = Modifier
+                        .border(
+                            1.dp,
+                            color = colorResource(id = R.color.fblaci),
+                            shape = RectangleShape
+                        )
+                        .background(gradient2, shape = RectangleShape)
+                )
+                {
+                    Row(
+                        modifier = Modifier
+                            .padding(start = 6.dp, top = 10.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Absolute.SpaceBetween
+                    ) {
+                        Text(text = "Locations", fontWeight = FontWeight.Bold, fontSize = 30.sp)
+                        IconButton(
+                            onClick = { showDialog = true }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.AddCircle,
+                                contentDescription = "Add location",
+                                modifier = Modifier.size(40.dp)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.padding(7.dp))
+                    Row(modifier = Modifier.padding(start = 6.dp)) {
+                        Text(
+                            text = "Home Address: ",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+                        )
+                        //In this place Users Home Address will be shown.
+                    }
+                    Spacer(modifier = Modifier.padding(5.dp))
+                    Row(modifier = Modifier.padding(start = 6.dp, bottom = 10.dp)) {
+                        Text(text = "Workplace: ", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                        //In this place Users Workplace will be shown.
+                    }
                 }
-                Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.Bottom,
+                Spacer(modifier = Modifier.padding(20.dp))
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    IconButton(onClick = {navController.navigate("Main Menu")}) {
-                        Icon(
-                            imageVector = Icons.Default.Home,
-                            contentDescription = "Main Menu",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
+                    Button(
+                        onClick = { navController.navigate("Sale History") },
+                        colors = ButtonDefaults.buttonColors(Color.Transparent),
+                        shape = RectangleShape,
+                        modifier = Modifier
+                            .background(gradient2)
+                            .fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Sale History",
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.fillMaxWidth(),
+                            color = Color.Black
                         )
-                    }
-                    IconButton(onClick = {navController.navigate("Messages")}) {
                         Icon(
-                            painter = painterResource(id = R.drawable.chat_icon),
+                            imageVector = Icons.Default.KeyboardArrowRight,
                             contentDescription = "",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
-                        )
+                            modifier = Modifier.size(10.dp),
+
+                            )
                     }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.camera_icon),
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
-                        )
-                    }
-                    IconButton(onClick = {navController.navigate("Favourite Ads")}) {
-                        Icon(
-                            imageVector = Icons.Default.Favorite,
-                            contentDescription = "Favoruites",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
-                        )
-                    }
-                    IconButton(onClick = {navController.navigate("Profile")}) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Profile",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Button(
+                        onClick = { navController.navigate("Purchase History") },
+                        colors = ButtonDefaults.buttonColors(Color.Transparent),
+                        shape = RectangleShape,
+                        modifier = Modifier.background(gradient2)
+                    ) {
+                        Text(
+                            text = "Purchase History",
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.fillMaxWidth(),
+                            color = Color.Black
                         )
                     }
                 }

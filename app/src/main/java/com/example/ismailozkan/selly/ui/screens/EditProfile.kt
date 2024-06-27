@@ -25,9 +25,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,6 +46,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,7 +55,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.ismailozkan.selly.R
+import com.example.ismailozkan.selly.ui.BottomBar
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditProfileScreen(navController: NavHostController){
     Box(modifier = Modifier
@@ -68,23 +78,53 @@ fun EditProfileScreen(navController: NavHostController){
         var description by rememberSaveable { mutableStateOf("") }
         var phonenumber by rememberSaveable { mutableStateOf("") }
 
+        Scaffold(topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary
+                ),
+                title = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Spacer(modifier = Modifier.padding(20.dp))
+                        Text(text = "Edit Profile", fontWeight = FontWeight.Bold, fontSize = 30.sp)
+                        IconButton(onClick = { navController.navigate("Main Menu") }, modifier = Modifier.size(48.dp)) {
+                            Image(
+                                painter = painterResource(id = R.drawable.selly),
+                                contentDescription = ""
+                            )
+                        }
+                    }
 
-
+                }
+            )
+        },
+            bottomBar = { BottomBar(navController = navController)}
+        ) {innerPadding ->
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(brush = Brush.linearGradient(colors = listOf(colorResource(id = R.color.fblaci), Color.White))))
         Column(modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(8.dp)) {
+            .padding(innerPadding)) {
             Row (modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween){
-                Button(onClick = { notification.value = "Cancelled" },
+                Button(onClick = { notification.value = "Cancelled"
+                                 navController.navigate("Profile")},
                     colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci))
                 ) {
                     Text(text = "Cancel")
 
 
                 }
-                Button(onClick = { notification.value="Profile Updated"},
+                Button(onClick = { notification.value="Profile Updated"
+                    navController.navigate("Profile")},
                     colors = ButtonDefaults.buttonColors(colorResource(id = R.color.fblaci))) {
                     Text(text = "Save")
 
@@ -129,8 +169,10 @@ fun EditProfileScreen(navController: NavHostController){
                     })
             }
         }
+        }
     }
 }
+
 @Composable
 fun ProfileImage(){
     val imageUri = rememberSaveable { mutableStateOf("") }

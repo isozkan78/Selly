@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "335436291055",
+    "project_id": "selly-f8a67",
+    "storage_bucket": "selly-f8a67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335436291055:android:87d8e4fdc64fef7ce5b41a",
+        "android_client_info": {
+          "package_name": "com.example.ismailozkan.selly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7hZn6AJMf6Wlbvw8u-emwHEr2EE9SzbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

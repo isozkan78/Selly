@@ -7,12 +7,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.ismailozkan.selly.ui.screens.AdvertisementScreen
 import com.example.ismailozkan.selly.ui.screens.AnimatedSplashScreen
+import com.example.ismailozkan.selly.ui.screens.BuyScreen
 import com.example.ismailozkan.selly.ui.screens.EditProfileScreen
 import com.example.ismailozkan.selly.ui.screens.FavoruitesScreen
 import com.example.ismailozkan.selly.ui.screens.LogInScreen
 import com.example.ismailozkan.selly.ui.screens.MessagesScreen
 import com.example.ismailozkan.selly.ui.screens.ProfileScreen
+import com.example.ismailozkan.selly.ui.screens.PurchaseHistoryScreen
 import com.example.ismailozkan.selly.ui.screens.SaleHistoryScreen
+import com.example.ismailozkan.selly.ui.screens.SaleScreen
 import com.example.ismailozkan.selly.ui.screens.Splash
 
 
@@ -28,9 +31,9 @@ fun MyNavHost(navController: NavHostController, starDest: String) {
         composable(route = "Sale History") {
             SaleHistoryScreen(navController = navController)
         }
-      //  composable(route = "Purchase History") {
-       //     PurchaseHistory(navController = navController)
-       // }
+        composable(route = "Purchase History") {
+            PurchaseHistoryScreen(navController = navController)
+        }
         composable(route = "Messages") {
             MessagesScreen(navController = navController)
         }
@@ -43,11 +46,17 @@ fun MyNavHost(navController: NavHostController, starDest: String) {
         composable(route = "Profile") {
             ProfileScreen(navController = navController)
         }
-        composable(route = "MyAdvertisements") {
+        composable(route = "My Advertisements") {
             AdvertisementScreen(navController = navController)
         }
         composable(route = "SplashScreen") {
             AnimatedSplashScreen(navController = navController)
         }
+        composable(route = "Sale") {
+            SaleScreen(navController = navController)
+        }
+       // composable(route = "Buy $itemName") {
+         //   BuyScreen(navController = navController)
+        //}
     }
 }

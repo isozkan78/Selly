@@ -24,12 +24,17 @@ import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.MailOutline
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -92,7 +97,7 @@ fun SearchBar(
         keyboardActions = KeyboardActions(
             onSearch = { onSearch() }
         )
-    )
+        )
 }
 
 @Composable
@@ -100,22 +105,29 @@ fun ItemList(items: List<Product> , navController: NavController) {
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-                    .clickable {
-                        navController.navigate("Buy $item")
-                    }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 20.dp
+                ),
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Image(
-                    painter = rememberImagePainter(item.painter),
-                    contentDescription = item.name,
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
-                )
-                Text(text = item.name)
+                        .padding(8.dp)
+                        .clickable {
+                            navController.navigate("Buy $item")
+                        }
+                ) {
+                    Image(
+                        painter = rememberImagePainter(item.painter),
+                        contentDescription = item.name,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                    )
+                    Text(text = item.name)
+                }
             }
         }
     }
@@ -133,7 +145,7 @@ fun BottomBar(navController: NavController){
     ) {
         Spacer(modifier = Modifier.weight(1f))
         IconButton(onClick = {
-            navController.navigate("MainMenu")
+            navController.navigate("Main Menu")
         }) {
             Icon(
                 Icons.Outlined.Home,
@@ -164,7 +176,7 @@ fun BottomBar(navController: NavController){
         }
         Spacer(modifier = Modifier.weight(1f))
         IconButton(onClick = {
-            navController.navigate("FavouriteAds")
+            navController.navigate("Favourite Ads")
         }) {
             Icon(
                 Icons.Outlined.FavoriteBorder,
@@ -184,7 +196,6 @@ fun BottomBar(navController: NavController){
         Spacer(modifier = Modifier.weight(1f))
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

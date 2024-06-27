@@ -67,7 +67,7 @@ fun FavoruitesScreen(navController: NavHostController) {
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         //Spacer(modifier = Modifier.weight(1f))
-                        Text("Favourites", fontWeight = FontWeight.Bold, modifier = Modifier, fontSize = 30.sp)
+                        Text("Favourites", fontWeight = FontWeight.Bold, fontSize = 30.sp)
                         //Spacer(modifier = Modifier.weight(1f))
                     }
                     Row ( horizontalArrangement = Arrangement.End,

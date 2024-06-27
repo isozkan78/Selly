@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.ismailozkan.selly.R
+import com.example.ismailozkan.selly.ui.BottomBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,7 +69,7 @@ fun AdvertisementScreen(navController: NavController) {
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
-                    containerColor = Color.Transparent,
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary
                     ),
                 title = {
@@ -92,54 +93,13 @@ fun AdvertisementScreen(navController: NavController) {
         },
 
         bottomBar = {
-            BottomAppBar(
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.primary
-            ) {
-                Row (horizontalArrangement = Arrangement.SpaceEvenly , modifier = Modifier.fillMaxWidth()) {
-                    IconButton(onClick = { navController.navigate("Main Menu") }) {
-                        Icon(
-                            imageVector = Icons.Default.Home,
-                            contentDescription = "Main Menu",
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                    IconButton(onClick = { navController.navigate("Messages") }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.chat_icon),
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.camera_icon),
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp)
-
-                        )
-                    }
-                    IconButton(onClick = { navController.navigate("Favourite Ads") }) {
-                        Icon(
-                            imageVector = Icons.Default.Favorite,
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                    IconButton(onClick = { navController.navigate("Profile") }) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Profile",
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                }
-            }
+            BottomBar(navController = navController)
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .background(brush = gradient),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

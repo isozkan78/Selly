@@ -25,11 +25,15 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.ismailozkan.selly.R
+import com.example.ismailozkan.selly.ui.BottomBar
 
 class OtherUserProfile : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,37 +65,50 @@ class OtherUserProfile : ComponentActivity() {
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OtherUserProfileScreen(navController : NavHostController) {
 
     val starCount = 5
     val selectedStars = 3
 
-    val gradient = Brush.verticalGradient(listOf(Color.White, colorResource(id = R.color.fblaci)))
+    val gradient = Brush.verticalGradient(listOf(colorResource(id = R.color.fblaci),Color.White))
     val gradient2 = Brush.verticalGradient(listOf(Color.White, Color.Gray))
 
-    Box(modifier = Modifier.background(gradient)) {
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Brush.linearGradient(listOf(Color.White, Color.LightGray))),
-            horizontalArrangement = Arrangement.Absolute.SpaceBetween
-        ){
-            Text(
-                text = "Profile",
-                fontWeight = FontWeight.Bold,
-                fontSize = 35.sp
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary
+                ),
+                title = {
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        Text("Users Profile", fontWeight = FontWeight.Bold, modifier = Modifier, fontSize = 30.sp)
+                    }
+                    Row ( horizontalArrangement = Arrangement.End,
+                        modifier = Modifier.fillMaxWidth()){
+                        IconButton(onClick = { navController.navigate("Main Menu") }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.selly),
+                                contentDescription = "Selly"
+                            )
+                        }
+                    }
+                }
             )
-            IconButton(onClick = {navController.navigate("Main Menu")}) {
-                Image(
-                    painter = painterResource(id = R.drawable.selly),
-                    contentDescription = "",
-                    modifier = Modifier.size(150.dp)
-                )
-            }
-        }
+        },
+        bottomBar = { BottomBar(navController = navController)}
+    )
+    {
+        innerPadding ->
+    Box(modifier = Modifier.background(gradient).padding(innerPadding)) {
         Column(
-            modifier = Modifier.padding(start = 10.dp, top = 150.dp, end = 10.dp),
+            modifier = Modifier.padding(start = 10.dp, top = 50.dp, end = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Column(
@@ -243,55 +261,10 @@ fun OtherUserProfileScreen(navController : NavHostController) {
                         color = Color.Black
                     )
                 }
-                Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.Bottom,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    IconButton(onClick = {navController.navigate("Main Menu")}) {
-                        Icon(
-                            imageVector = Icons.Default.Home,
-                            contentDescription = "Main Menu",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
-                        )
-                    }
-                    IconButton(onClick = {navController.navigate("Messages")}) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.chat_icon),
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.camera_icon),
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
-                        )
-                    }
-                    IconButton(onClick = {navController.navigate("Favourite Ads")}) {
-                        Icon(
-                            imageVector = Icons.Default.Favorite,
-                            contentDescription = "Favoruites",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
-                        )
-                    }
-                    IconButton(onClick = {navController.navigate("Profile")}) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Profile",
-                            modifier = Modifier.size(100.dp),
-                            colorResource(id = R.color.white)
-                        )
-                    }
-                }
             }
         }
     }
+}
 }
 
 @Preview(showBackground = true)
